@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tip Calculator</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 28px 16px; background: #eef4f0; color: #193d33; font-family: system-ui, sans-serif; }
+    main { width: 100%; max-width: 460px; padding: 36px; background: #fff; border-radius: 24px; box-shadow: 0 18px 60px #183d3312; }
+    .eyebrow { font-size: 12px; letter-spacing: 2px; font-weight: 700; color: #507767; }
+    h1 { font-size: 32px; margin: 12px 0; letter-spacing: -1px; }
+    .intro, footer { color: #64766f; font-size: 14px; line-height: 1.6; }
+    form { margin-top: 28px; }
+    label { display: block; font-size: 14px; font-weight: 650; margin: 18px 0 8px; }
+    input, select, button { width: 100%; min-height: 48px; font: inherit; border-radius: 10px; }
+    input, select { padding: 12px; color: #193d33; background: #fafcfb; border: 1px solid #cbd9d1; }
+    :focus-visible { outline: 3px solid #6aa78c; outline-offset: 3px; }
+    [aria-invalid="true"] { border-color: #a42f2f; }
+    button { margin-top: 22px; border: 0; background: #205e48; color: white; font-weight: 700; cursor: pointer; }
+    button:hover { background: #174a38; }
+    #error { color: #a42f2f; font-size: 14px; line-height: 1.5; }
+    #error:empty { display: none; }
+    .results { margin-top: 26px; background: #eff6f2; padding: 20px; border-radius: 14px; }
+    .row { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0; font-size: 14px; }
+    .row strong { overflow-wrap: anywhere; text-align: right; }
+    .each { border-top: 1px solid #cfdfd5; padding-top: 18px; margin-top: 18px; align-items: center; }
+    .each strong { font-size: 28px; }
+    footer { text-align: center; margin-top: 22px; font-size: 12px; }
+    @media (max-width: 380px) { main { padding: 24px; } h1 { font-size: 28px; } }
+  </style>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- input for bill amount, dropdown for tip percent 10 15 20, number of people, a Calculate button, and a result area -->
+  <main>
+    <span class="eyebrow">SHARE A GOOD MEAL</span>
+    <h1>Tip Calculator</h1>
+    <p class="intro">A little thanks. An easy split.</p>
+    <form id="calculator" novalidate>
+      <label for="bill">Bill amount</label>
+      <input id="bill" name="bill" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 80.00" aria-describedby="error">
+      <label for="tip">Tip percentage</label>
+      <select id="tip" name="tip"><option value="10">10%</option><option value="15" selected>15%</option><option value="20">20%</option></select>
+      <label for="people">Number of people</label>
+      <input id="people" name="people" type="number" min="1" step="1" inputmode="numeric" value="1" aria-describedby="error">
+      <button type="submit">Calculate</button>
+      <p id="error" role="alert"></p>
+    </form>
+    <section class="results" aria-label="Calculation results" aria-live="polite" aria-atomic="true">
+      <div class="row"><span>Tip amount</span><strong id="tip-amount">—</strong></div>
+      <div class="row"><span>Total amount</span><strong id="total">—</strong></div>
+      <div class="row each"><span>Per person</span><strong id="per-person">—</strong></div>
+    </section>
+    <footer>All amounts use the same currency as your bill.</footer>
+  </main>
+</body>
+</html>
